@@ -5,12 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using C8KJ98_ADT_2022_23_1.Models;
 
-
 namespace C8KJ98_ADT_2022_23_1.Repository
 {
-    interface IArtistsRepository:IRepository<Artists>
+    public interface IServicesRepository : IRepository<Services>
     {
-        void UpdatePrice(int id, int newprice);
-        void UpdateDuration(int id, int newduration);
+        void UpdatePrice(int id, int newPrice);
+        void UpdateName(int id, string newName);
+        void UpdateRating(int id, int newRating);
+
     }
 }

@@ -12,7 +12,7 @@ namespace C8KJ98_ADT_2022_23_1.Models
 {
     [Table("ConnectorsReservationsServices")]
 
-    public class ConnectorReservationsServices
+    public class ReservationsServices
     {
         [Key]
         [Required]

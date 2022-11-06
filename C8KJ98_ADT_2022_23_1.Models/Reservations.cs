@@ -14,7 +14,7 @@ namespace C8KJ98_ADT_2022_23_1.Models
     {
         public Reservations()
         {
-            this.ConnectorReservationsServices = new HashSet<ConnectorReservationsServices>();
+            this.ConnectorReservationsServices = new HashSet<ReservationsServices>();
         }
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -42,7 +42,7 @@ namespace C8KJ98_ADT_2022_23_1.Models
 
 
         [NotMapped]
-        public virtual ICollection<ConnectorReservationsServices> ConnectorReservationsServices { get; }
+        public virtual ICollection<ReservationsServices> ConnectorReservationsServices { get; }
 
 
         public override string ToString()
