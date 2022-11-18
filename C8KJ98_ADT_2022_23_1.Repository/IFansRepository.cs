@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace C8KJ98_ADT_2022_23_1.Repository
 {
-    interface IFansRepository:IRepository<Fans>
+    public interface IFansRepository:IRepository<Fans>
     {
         void UpdateCity(int id, string newcity);
         void UpdatePhone(int id, int NewPhoneNumber);

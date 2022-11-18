@@ -8,7 +8,7 @@ using C8KJ98_ADT_2022_23_1.Models;
 
 namespace C8KJ98_ADT_2022_23_1.Repository
 {
-    interface IArtistsRepository:IRepository<Artists>
+    public interface IArtistsRepository:IRepository<Artists>
     {
         void UpdatePrice(int id, int newprice);
         void UpdateDuration(int id, int newduration);

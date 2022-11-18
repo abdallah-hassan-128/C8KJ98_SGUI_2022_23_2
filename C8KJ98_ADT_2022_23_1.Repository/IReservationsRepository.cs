@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace C8KJ98_ADT_2022_23_1.Repository
 {
-    interface IReservationsRepository:IRepository<Reservations>
+    public interface IReservationsRepository:IRepository<Reservations>
     {
         void UpdateDate(int id, DateTime newDate);
 

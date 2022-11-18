@@ -3,10 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using C8KJ98_ADT_2022_23_1.Models;
 
 namespace C8KJ98_ADT_2022_23_1.Logic
 {
-    interface IAdministratorLogic
+    public interface IAdministratorLogic
     {
+        Services GetService(int id);
+        IEnumerable<Services> GetAllServices();
+        Reservations GetReservation(int id);
+        IEnumerable<Reservations> GetAllReservations();
+        Artists GetArtist(int id);
+        IEnumerable<Artists> GetAllArtists();
+        Fans GetFan(int id);
+        IEnumerable<Fans> GetAllFans();
+        void UpdateServiceCost(int serviceId, int cost);
+        void UpdateArtistCost(int artistId, int cost);
+
+        //////// non-crud ops should be added
+        
+        IEnumerable<ArtistEarnings> ArtistEarnings();
+        IEnumerable<FanTotalSpending> GetFanTotalSpendings();
+
+        IEnumerable<ArtistEarnings> MostPaidArtist();
+        IEnumerable<FanTotalSpending> BestFan();
+
     }
 }

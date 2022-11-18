@@ -8,7 +8,7 @@ using C8KJ98_ADT_2022_23_1.Data;
 
 namespace C8KJ98_ADT_2022_23_1.Repository
 {
-    class FansRepository : Repository<Fans>, IFansRepository
+    public class FansRepository : Repository<Fans>, IFansRepository
     {
         public FansRepository(TalkWithYourFavoriteArtistDbContext DbContext) : base(DbContext) { }
         public override Fans GetOne(int id)
