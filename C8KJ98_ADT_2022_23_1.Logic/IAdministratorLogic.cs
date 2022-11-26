@@ -23,10 +23,8 @@ namespace C8KJ98_ADT_2022_23_1.Logic
         //////// non-crud ops should be added
         
         IEnumerable<ArtistEarnings> ArtistEarnings();
-        IEnumerable<FanTotalSpending> GetFanTotalSpendings();
 
         IEnumerable<ArtistEarnings> MostPaidArtist();
-        IEnumerable<FanTotalSpending> BestFan();
 
     }
 }
