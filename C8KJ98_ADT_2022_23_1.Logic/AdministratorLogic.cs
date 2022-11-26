@@ -148,7 +148,21 @@ namespace C8KJ98_ADT_2022_23_1.Logic
         public IEnumerable<ArtistEarnings> ArtistEarnings()
         {
             throw new NotImplementedException();
+            var TotalEarning = from artists in this._ArtistRepository.GetAll()
+                               join reservations in this._ReservationsRepository.GetAll()
+                               on artists.Id equals reservations.ArtistId
+                               group reservations by reservations.ArtistId.Value into gr
+                               select new ArtistEarnings()
+                               {
+                                   ArtistId = gr.Key,
+                                   ArtistName = this._ArtistRepository.GetOne(gr.Key).Name,
+                                   FinishedJobs = gr.Count(),
+                                   OverallEarnings = (gr.Count()) * this._ArtistRepository.GetOne(gr.Key).Price,
+                               };
+            return TotalEarning;
+
         }
+
         public IEnumerable<FanTotalSpending> BestFan()
         {
             throw new NotImplementedException();
@@ -159,14 +173,20 @@ namespace C8KJ98_ADT_2022_23_1.Logic
         }
         public IEnumerable<ArtistEarnings> MostPaidArtist()
         {
-            throw new NotImplementedException();
+            var Mostpaidartist = ArtistEarnings().OrderBy(x => x.OverallEarnings);
+            return Mostpaidartist;
         }
 
+        
 
 
 
 
 
 
-    }
+
+
+
+        }
+
 }
