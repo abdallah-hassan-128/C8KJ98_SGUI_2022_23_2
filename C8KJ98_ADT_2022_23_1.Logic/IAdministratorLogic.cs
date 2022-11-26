@@ -21,10 +21,11 @@ namespace C8KJ98_ADT_2022_23_1.Logic
         void UpdateArtistCost(int artistId, int cost);
 
         //////// non-crud ops should be added
-        
-        IEnumerable<ArtistEarnings> ArtistEarnings();
-
-        IEnumerable<ArtistEarnings> MostPaidArtist();
+        IEnumerable<KeyValuePair<string, int>> ArtistEarnings();
+        IEnumerable<KeyValuePair<string, int>> MostPaidArtist();
+        IEnumerable<KeyValuePair<string, int>> LessPaidArtist();
+        IEnumerable<KeyValuePair<string, int>> BestFan();
+        IEnumerable<KeyValuePair<string, int>> WorstFan();
 
     }
 }
