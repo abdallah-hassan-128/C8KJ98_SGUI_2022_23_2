@@ -23,10 +23,17 @@ namespace C8KJ98_ADT_2022_23_1.Logic
             _ArtistRepository = artistRepository;
             _ReservationsServicesConnectionRepository = reservationsServicesConnectionRepository;
         }
+
+        public AdministratorLogic(IArtistsRepository artistRepository)
+        {
+            _ArtistRepository = artistRepository;
+        }
+
         public void UpdateArtistCost(int artistId, int cost)
         {
             this._ArtistRepository.UpdatePrice(artistId, cost);
         }
+
         public void UpdateServiceCost(int serviceId, int cost)
         {
             this._ServicesRepository.UpdatePrice(serviceId, cost);
@@ -121,7 +128,7 @@ namespace C8KJ98_ADT_2022_23_1.Logic
             }
             else
             {
-                throw new Exception("This ID can't be found on our ArtistsDatabase.");
+                throw new ArgumentException("This ID can't be found on our ArtistsDatabase.");
             }
         }
         public Services AddNewService(string name, int price, int rating)
@@ -160,7 +167,7 @@ namespace C8KJ98_ADT_2022_23_1.Logic
         
         public IEnumerable<KeyValuePair<string, int>> MostPaidArtist()
         {
-            var Mostpaidartist = ArtistEarnings().OrderByDescending(x => x.Value);
+            var Mostpaidartist = ArtistEarnings().OrderByDescending(x => x.Value).Take(1);
             return Mostpaidartist;
         }
 
@@ -168,7 +175,7 @@ namespace C8KJ98_ADT_2022_23_1.Logic
 
         public IEnumerable<KeyValuePair<string, int>> LessPaidArtist()
         {
-            var Lesspaidartist = ArtistEarnings().OrderByDescending(x => x.Value);
+            var Lesspaidartist = ArtistEarnings().OrderBy(x => x.Value).Take(1);
             return Lesspaidartist;
         }
 
