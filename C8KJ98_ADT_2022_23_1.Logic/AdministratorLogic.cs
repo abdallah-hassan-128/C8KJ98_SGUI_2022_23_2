@@ -24,10 +24,7 @@ namespace C8KJ98_ADT_2022_23_1.Logic
             _ReservationsServicesConnectionRepository = reservationsServicesConnectionRepository;
         }
 
-        public AdministratorLogic(IArtistsRepository artistRepository)
-        {
-            _ArtistRepository = artistRepository;
-        }
+       
 
         public void UpdateArtistCost(int artistId, int cost)
         {
@@ -167,7 +164,7 @@ namespace C8KJ98_ADT_2022_23_1.Logic
         
         public IEnumerable<KeyValuePair<string, int>> MostPaidArtist()
         {
-            var Mostpaidartist = ArtistEarnings().OrderByDescending(x => x.Value).Take(1);
+            var Mostpaidartist = ArtistEarnings().OrderByDescending(x => x.Value);
             return Mostpaidartist;
         }
 
@@ -203,8 +200,8 @@ namespace C8KJ98_ADT_2022_23_1.Logic
                            group Reservations by Reservations.FanId.Value into gr
                            select new KeyValuePair<string, int>
                            (this._FansRepository.GetOne(gr.Key).Name, gr.Count());
-            int maxNumOfReservations = WorstFan.Min(x => x.Value);
-            var Worstfann = WorstFan.Where(x => x.Value == maxNumOfReservations);
+            int minNumOfReservations = WorstFan.Min(x => x.Value);
+            var Worstfann = WorstFan.Where(x => x.Value == minNumOfReservations);
 
             return Worstfann;
         }

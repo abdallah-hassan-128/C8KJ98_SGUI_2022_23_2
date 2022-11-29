@@ -32,6 +32,9 @@ namespace C8KJ98_ADT_2022_23_1.Test
             MockFanRepository.Setup((t) => t.GetAll()).Returns(fans);
             FL = new FanLogic(MockFanRepository.Object);
         }
+
+        // Tests for crud-operations
+
         [Test]
         public void AddNewFanTest_Throws()
         {
