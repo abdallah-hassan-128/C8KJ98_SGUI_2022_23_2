@@ -10,7 +10,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace C8KJ98_ADT_2022_23_1.Models
 {
-    [Table("ConnectorsReservationsServices")]
+    [Table("ConnectorTable")]
 
     public class ReservationsServices
     {
@@ -30,7 +30,7 @@ namespace C8KJ98_ADT_2022_23_1.Models
         public virtual Services Services { get; set; }
         public override string ToString()
         {
-            return $"{this.Id,3} | {this.Reservations?.Id,5}\t {this.Services?.Name ?? "N/A",-40} {this.Services?.Price ?? 0,10} Mad";
+            return $"{this.Id,3} | {this.ReservationId,5}\t {this.ServiceId,10}";
         }
     }
 }

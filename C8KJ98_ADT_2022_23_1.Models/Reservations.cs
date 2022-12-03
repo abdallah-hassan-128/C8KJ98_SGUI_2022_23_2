@@ -47,7 +47,7 @@ namespace C8KJ98_ADT_2022_23_1.Models
 
         public override string ToString()
         {
-            return $"\n{this.Id,3} | {this.Fan?.Name ?? "N/A",-20} {this.DateTime.Year,10}.{this.DateTime.Month}.{this.DateTime.Day} \t{this.Artist?.Name ?? "N/A",-10} {this.ConnectorReservationsServices?.Count ?? 0,10}";
+            return $"\n{this.Id,3} | { this.FanId,-20} {this.DateTime.Year,10}.{this.DateTime.Month}.{this.DateTime.Day} \t{this.ArtistId,15}";
         }
     }
 }
