@@ -11,23 +11,36 @@ namespace C8KJ98_ADT_2022_23_1.Logic
    public class ReservationsLogic:IReservationsLogic
     {
         protected IReservationsRepository _ReservationsRepository;
+        protected IFansRepository _fansrepo;
+        protected IArtistsRepository _artistrepo;
 
-        public ReservationsLogic(IReservationsRepository reservationsRepository)
+        public ReservationsLogic(IReservationsRepository reservationsRepository, IFansRepository fansrepo, IArtistsRepository artistrepo)
         {
             _ReservationsRepository = reservationsRepository;
+            _fansrepo = fansrepo;
+            _artistrepo = artistrepo;
         }
 
         public void UpdateReservationDate(int id, DateTime newDate)
         {
             this._ReservationsRepository.UpdateDate(id, newDate);
         }
+
         public Reservations AddNewReservation(int fanId, int artistId, DateTime dateTime)
         {
 
             Reservations ReservationToAdd = new Reservations() { FanId = fanId, ArtistId = artistId, DateTime = dateTime };
-            this._ReservationsRepository.Add(ReservationToAdd);
-            return ReservationToAdd;
+            if (_fansrepo.GetOne(fanId) == null || _artistrepo.GetOne(artistId) == null)
+            {
+                throw new Exception("Invalid data");
+            }
+            else
+            {
+                this._ReservationsRepository.Add(ReservationToAdd);
+                return ReservationToAdd;
+            }
         }
+
         public void DeleteReservation(int id)
         {
             Reservations ReservationToDelete = this._ReservationsRepository.GetOne(id);

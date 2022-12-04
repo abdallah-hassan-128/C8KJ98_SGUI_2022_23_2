@@ -60,8 +60,8 @@ namespace C8KJ98_ADT_2022_23_1.Logic
         // 3 non-crud methods
         public IEnumerable<KeyValuePair<string, int>> ArtistEarnings()
         {
-            var TotalEarning = from artists in this._ArtistRepository.GetAll()
-                               join reservations in this._ReservationsRepository.GetAll()
+            var TotalEarning = from artists in this._ArtistRepository.GetAll().ToList()
+                               join reservations in this._ReservationsRepository.GetAll().ToList()
                                on artists.Id equals reservations.ArtistId
                                group reservations by reservations.ArtistId.Value into gr
                                select new KeyValuePair<string, int>
