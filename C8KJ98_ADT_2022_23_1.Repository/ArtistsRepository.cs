@@ -13,9 +13,8 @@ namespace C8KJ98_ADT_2022_23_1.Repository
         public ArtistsRepository(TalkWithYourFavoriteArtistDbContext DbContext) : base(DbContext) { }
         public override Artists GetOne(int id)
         {
-            return context
-                   .Artists
-                   .SingleOrDefault(artist => artist.Id == id);
+            return this.GetAll().SingleOrDefault(artist => artist.Id == id);
+
         }
         public void UpdateDuration(int id, int newduration)
         {

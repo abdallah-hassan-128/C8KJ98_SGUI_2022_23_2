@@ -13,9 +13,8 @@ namespace C8KJ98_ADT_2022_23_1.Repository
         public FansRepository(TalkWithYourFavoriteArtistDbContext DbContext) : base(DbContext) { }
         public override Fans GetOne(int id)
         {
-            return context
-                .Fans
-                .SingleOrDefault(fan => fan.Id == id);
+            return this.GetAll().SingleOrDefault(fan => fan.Id == id);
+
         }
         public void UpdateCity(int id, string newcity)
         {

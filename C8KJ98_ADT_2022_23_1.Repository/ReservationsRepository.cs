@@ -27,9 +27,8 @@ namespace C8KJ98_ADT_2022_23_1.Repository
         }
         public override Reservations GetOne(int id)
         {
-            return context
-                .Reservations
-                .SingleOrDefault(reservation => reservation.Id == id);
+            return this.GetAll().SingleOrDefault(reservation => reservation.Id == id);
+
         }
 
     }

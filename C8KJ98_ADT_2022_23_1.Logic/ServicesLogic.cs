@@ -10,7 +10,7 @@ namespace C8KJ98_ADT_2022_23_1.Logic
 {
     public class ServicesLogic:IServicesLogic
     {
-        private readonly IServicesRepository _ServicesRepository;
+        protected  IServicesRepository _ServicesRepository;
 
         public ServicesLogic(IServicesRepository servicesRepository)
         {

@@ -13,9 +13,8 @@ namespace C8KJ98_ADT_2022_23_1.Repository
         public ServicesRepository(TalkWithYourFavoriteArtistDbContext DbContext) : base(DbContext) { }
         public override Services GetOne(int id)
         {
-            return context
-                .Services
-                .SingleOrDefault(service => service.Id == id);
+            return this.GetAll().SingleOrDefault(service => service.Id == id);
+
         }
         public void UpdateName(int id, string newName)
         {

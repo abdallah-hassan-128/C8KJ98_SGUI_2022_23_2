@@ -10,8 +10,8 @@ namespace C8KJ98_ADT_2022_23_1.Logic
 {
     public class ArtistsLogic:IArtistsLogic
     {
-        private readonly IArtistsRepository _ArtistRepository;
-        private readonly IReservationsRepository _ReservationsRepository;
+        protected IArtistsRepository _ArtistRepository;
+        protected IReservationsRepository _ReservationsRepository;
 
         public ArtistsLogic(IArtistsRepository artistRepository, IReservationsRepository reservationsRepository)
         {
@@ -65,19 +65,31 @@ namespace C8KJ98_ADT_2022_23_1.Logic
                                on artists.Id equals reservations.ArtistId
                                group reservations by reservations.ArtistId.Value into gr
                                select new KeyValuePair<string, int>
-                               (this._ArtistRepository.GetOne(gr.Key).Name, (gr.Count()) * this._ArtistRepository.GetOne(gr.Key).Price);
+                               (_ArtistRepository.GetOne(gr.Key).Name, (gr.Count()) * _ArtistRepository.GetOne(gr.Key).Price);
             return TotalEarning;
         }
-        public KeyValuePair<string, int> MostPaidArtist()
+        public List<KeyValuePair<string, int>> MostPaidArtist()
         {
-            var Mostpaidartist = ArtistEarnings().OrderByDescending(x => x.Value).FirstOrDefault();
-            return Mostpaidartist;
+            int max = ArtistEarnings().Max(t => t.Value);
+            string[] maxNums = ArtistEarnings().Where(x => x.Value == max).Select(x => x.Key).ToArray();
+            List<KeyValuePair<string, int>> r = new List<KeyValuePair<string, int>>();
+            for (int i = 0; i < maxNums.Length; i++)
+            {
+                r.Add(new KeyValuePair<string, int>(maxNums[i], max));
+            }
+            return r;
 
         }
-        public KeyValuePair<string, int> LessPaidArtist()
+        public List<KeyValuePair<string, int>> LessPaidArtist()
         {
-            var Lesspaidartist = ArtistEarnings().OrderBy(x => x.Value).FirstOrDefault();
-            return Lesspaidartist;
+            int min = ArtistEarnings().Min(t => t.Value);
+            string[] minNums = ArtistEarnings().Where(x => x.Value == min).Select(x => x.Key).ToArray();
+            List<KeyValuePair<string, int>> r = new List<KeyValuePair<string, int>>();
+            for (int i = 0; i < minNums.Length; i++)
+            {
+                r.Add(new KeyValuePair<string, int>(minNums[i], min));
+            }
+            return r;
         }
 
     }

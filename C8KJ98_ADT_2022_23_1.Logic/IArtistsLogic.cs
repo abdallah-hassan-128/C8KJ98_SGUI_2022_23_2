@@ -16,7 +16,7 @@ namespace C8KJ98_ADT_2022_23_1.Logic
         void UpdateArtistCost(int artistId, int cost);
 
         IEnumerable<KeyValuePair<string, int>> ArtistEarnings();
-        KeyValuePair<string, int> MostPaidArtist();
-        KeyValuePair<string, int> LessPaidArtist();
+        List<KeyValuePair<string, int>> MostPaidArtist();
+        List<KeyValuePair<string, int>> LessPaidArtist();
     }
 }

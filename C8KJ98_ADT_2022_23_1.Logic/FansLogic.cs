@@ -10,8 +10,8 @@ namespace C8KJ98_ADT_2022_23_1.Logic
 {
    public class FansLogic : IFansLogic
     {
-        private readonly IReservationsRepository _ReservationsRepository;
-        private readonly IFansRepository _FansRepository;
+        protected IReservationsRepository _ReservationsRepository;
+        protected IFansRepository _FansRepository;
 
         public FansLogic(IReservationsRepository reservationsRepo, IFansRepository fansRepo)
         {
@@ -76,30 +76,48 @@ namespace C8KJ98_ADT_2022_23_1.Logic
         }
 
         // 2 non-crud methods
-        public KeyValuePair<string, int> BestFan()
+        public List<KeyValuePair<int, int>> BestFan()
         {
             var BestFan = from fan in this._FansRepository.GetAll()
                           join Reservations in this._ReservationsRepository.GetAll()
                           on fan.Id equals Reservations.FanId
                           group Reservations by Reservations.FanId.Value into gr
-                          select new KeyValuePair<string, int>
-                          (this._FansRepository.GetOne(gr.Key).Name, gr.Count());
-            int maxNumOfReservations = BestFan.Max(x => x.Value);
-            var bestfann = BestFan.Where(x => x.Value == maxNumOfReservations).FirstOrDefault();
-            return bestfann;
+                          select new
+                          {
+                              id = gr.Key,
+                              c = gr.Count()
+                          };
+            int max = BestFan.AsEnumerable().Max(t => t.c);
+
+            int[] maxNumOfReservationss = BestFan.Where(x => x.c == max).Select(x => x.id).ToArray();
+            List<KeyValuePair<int, int>> r = new List<KeyValuePair<int, int>>();
+            for (int i = 0; i < maxNumOfReservationss.Length; i++)
+            {
+                r.Add(new KeyValuePair<int, int>(maxNumOfReservationss[i], max));
+            }
+            return r;
         }
 
-        public KeyValuePair<string, int> WorstFan()
+        public List<KeyValuePair<int, int>> WorstFan()
         {
             var WorstFan = from fan in this._FansRepository.GetAll()
                            join Reservations in this._ReservationsRepository.GetAll()
-                           on fan.Id equals Reservations.FanId
+                          on fan.Id equals Reservations.FanId
                            group Reservations by Reservations.FanId.Value into gr
-                           select new KeyValuePair<string, int>
-                           (this._FansRepository.GetOne(gr.Key).Name, gr.Count());
-            int minNumOfReservations = WorstFan.Min(x => x.Value);
-            var Worstfann = WorstFan.Where(x => x.Value == minNumOfReservations).FirstOrDefault();
-            return Worstfann;
+                           select new
+                           {
+                               id = gr.Key,
+                               c = gr.Count()
+                           };
+            int min = WorstFan.AsEnumerable().Min(t => t.c);
+            int[] maxNumOfReservationss = WorstFan.Where(x => x.c == min).Select(x => x.id).ToArray();
+            List<KeyValuePair<int, int>> r = new List<KeyValuePair<int, int>>();
+            for (int i = 0; i < maxNumOfReservationss.Length; i++)
+            {
+                r.Add(new KeyValuePair<int, int>(maxNumOfReservationss[i], min));
+            }
+
+            return r;
         }
 
         public int ReservationsNumber(int id)

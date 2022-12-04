@@ -16,8 +16,8 @@ namespace C8KJ98_ADT_2022_23_1.Logic
         Fans GetFan(int id);
         IEnumerable<Fans> GetAllFans();
 
-        KeyValuePair<string, int> BestFan();
-        KeyValuePair<string, int> WorstFan();
+        List<KeyValuePair<int, int>> BestFan();
+        List<KeyValuePair<int, int>> WorstFan();
 
         int ReservationsNumber(int id);
     }

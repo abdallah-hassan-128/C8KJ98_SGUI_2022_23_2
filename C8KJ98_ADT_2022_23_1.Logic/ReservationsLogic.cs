@@ -10,7 +10,7 @@ namespace C8KJ98_ADT_2022_23_1.Logic
 {
    public class ReservationsLogic:IReservationsLogic
     {
-        private readonly IReservationsRepository _ReservationsRepository;
+        protected IReservationsRepository _ReservationsRepository;
 
         public ReservationsLogic(IReservationsRepository reservationsRepository)
         {

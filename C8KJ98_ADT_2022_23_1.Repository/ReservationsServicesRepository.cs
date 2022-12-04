@@ -13,9 +13,8 @@ namespace C8KJ98_ADT_2022_23_1.Repository
         public ReservationsServicesRepository(TalkWithYourFavoriteArtistDbContext DbContext) : base(DbContext) { }
         public override ReservationsServices GetOne(int id)
         {
-            return context
-                .ConnectorTable
-                .SingleOrDefault(connection => connection.Id == id);
+            return this.GetAll().SingleOrDefault(connection => connection.Id == id);
+
         }
 
     }
