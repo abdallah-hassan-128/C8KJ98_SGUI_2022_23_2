@@ -5,6 +5,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json.Serialization;
+
 
 
 namespace C8KJ98_ADT_2022_23_1.Models
@@ -42,8 +44,11 @@ namespace C8KJ98_ADT_2022_23_1.Models
         {
             return $"\n{this.Id,3} |  {this.Duration} hours {this.Price,10} MAD {this.Category,10}\t {this.Name,-1}";
         }
+
         [NotMapped]
+        [JsonIgnore]
         public virtual ICollection<Reservations> Reservations { get; }
+
     }
 }
 

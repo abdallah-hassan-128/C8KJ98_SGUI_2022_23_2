@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace C8KJ98_ADT_2022_23_1.Models
 {
@@ -31,7 +32,9 @@ namespace C8KJ98_ADT_2022_23_1.Models
         public int Price { get; set; }
 
         [NotMapped]
+        [JsonIgnore]
         public virtual ICollection<ReservationsServices> ConnectorReservationsServices { get; }
+        
 
         public override string ToString()
         {

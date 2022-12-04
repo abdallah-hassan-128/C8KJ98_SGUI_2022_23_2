@@ -23,8 +23,8 @@ namespace C8KJ98_ADT_2022_23_1.Endpoint
         {
             services.AddControllers();
 
-            services.AddControllersWithViews().AddNewtonsoftJson(options =>
-                                                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+            //// services.AddControllersWithViews().AddNewtonsoftJson(options =>
+           ////                                      options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             services.AddTransient<IFansLogic, FansLogic>();
             services.AddTransient<IArtistsLogic, ArtistsLogic>();
@@ -36,7 +36,7 @@ namespace C8KJ98_ADT_2022_23_1.Endpoint
             services.AddTransient<IReservationsRepository, ReservationsRepository>();
             services.AddTransient<IReservationsServicesRepository, ReservationsServicesRepository>();
             services.AddTransient<IServicesRepository, ServicesRepository>();
-            services.AddTransient<DbContext, TalkWithYourFavoriteArtistDbContext>();
+            services.AddTransient<TalkWithYourFavoriteArtistDbContext, TalkWithYourFavoriteArtistDbContext>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
