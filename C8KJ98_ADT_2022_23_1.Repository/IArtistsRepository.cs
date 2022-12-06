@@ -11,6 +11,5 @@ namespace C8KJ98_ADT_2022_23_1.Repository
     public interface IArtistsRepository:IRepository<Artists>
     {
         void UpdatePrice(int id, int newprice);
-        void UpdateDuration(int id, int newduration);
     }
 }

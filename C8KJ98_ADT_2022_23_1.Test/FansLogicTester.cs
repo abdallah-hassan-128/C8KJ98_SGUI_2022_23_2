@@ -51,6 +51,7 @@ namespace C8KJ98_ADT_2022_23_1.Test
         [Test]
         public void AddNewFanTest_Throws()
         {
+
             Fans fan = new Fans() { City = "budapest6", Email = "fan6@gmail.com", Name = null, PhoneNumber = 66666666 };
             //Arrange
             Assert.Throws<ArgumentException>(() => FL.AddNewFan(fan));

@@ -48,8 +48,10 @@ namespace C8KJ98_ADT_2022_23_1.Test
         [Test]
         public void AddNewArtistTest()
         {
+            Artists art = new Artists() { Name = "artist6", Duration = 1, Price = 600, Category = "c6" };
+
             //Act
-            Artists artist6 = AL.AddNewArtist("artist6", 1, 600, "c6");
+            Artists artist6 = AL.AddNewArtist(art);
             //Arrange
             Assert.That(artist6.Name, Is.EqualTo("artist6"));
         }

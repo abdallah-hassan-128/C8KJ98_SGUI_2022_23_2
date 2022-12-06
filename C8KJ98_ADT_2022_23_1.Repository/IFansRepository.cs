@@ -10,7 +10,6 @@ namespace C8KJ98_ADT_2022_23_1.Repository
     public interface IFansRepository:IRepository<Fans>
     {
         void UpdateCity(int id, string newcity);
-        void UpdatePhone(int id, int NewPhoneNumber);
-        void UpdateEmail(int id, string newEmail);
+        
     }
 }

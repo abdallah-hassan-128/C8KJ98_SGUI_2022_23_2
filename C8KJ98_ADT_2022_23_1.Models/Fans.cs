@@ -30,7 +30,6 @@ namespace C8KJ98_ADT_2022_23_1.Models
         public string City { get; set; }
 
 
-        [MaxLength(10)]
         [Required]
         public int PhoneNumber { get; set; }
 

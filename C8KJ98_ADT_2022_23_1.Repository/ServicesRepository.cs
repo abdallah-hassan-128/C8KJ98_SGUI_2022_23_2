@@ -16,19 +16,7 @@ namespace C8KJ98_ADT_2022_23_1.Repository
             return this.GetAll().SingleOrDefault(service => service.Id == id);
 
         }
-        public void UpdateName(int id, string newName)
-        {
-            var service = this.GetOne(id);
-            if (service == null)
-            {
-                throw new Exception("This id doesn't match to any service in our Database");
-            }
-            else
-            {
-                service.Name = newName;
-                this.context.SaveChanges();
-            }
-        }
+        
         public void UpdatePrice(int id, int newPrice)
         {
             var service = this.GetOne(id);
@@ -42,19 +30,7 @@ namespace C8KJ98_ADT_2022_23_1.Repository
                 this.context.SaveChanges();
             }
         }
-        public void UpdateRating(int id, int newRating)
-        {
-            var service = this.GetOne(id);
-            if (service == null)
-            {
-                throw new Exception("This id doesn't match to any service in our Database");
-            }
-            else
-            {
-                service.Rating = newRating;
-                this.context.SaveChanges();
-            }
-        }
+        
 
     }
 }
