@@ -32,6 +32,21 @@ namespace C8KJ98_ADT_2022_23_1.Endpoint.Controllers
             return FL.GetFan(id);
         }
 
+        // POST /fans
+        [HttpPost]
+        public void Post([FromBody] Fans value)
+        {
+            FL.AddNewFan(value);
+        }
+
+
+        // PUT /fans
+        [HttpPut]
+        public void Put([FromBody] Fans value)
+        {
+            FL.UpdateCity(value);
+        }
+
 
 
         // DELETE /fans/5

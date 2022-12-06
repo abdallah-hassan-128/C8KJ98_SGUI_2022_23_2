@@ -34,6 +34,21 @@ namespace C8KJ98_ADT_2022_23_1.Endpoint.Controllers
             return RL.GetReservation(id);
         }
 
+        // POST /reservations
+        [HttpPost]
+        public void Post([FromBody] Reservations value)
+        {
+            RL.AddNewReservation(value);
+        }
+
+
+        // PUT /reservations
+        [HttpPut]
+        public void Put([FromBody] Reservations value)
+        {
+            RL.UpdateReservationDate(value);
+        }
+
 
 
         // DELETE /reservations/5

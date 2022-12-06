@@ -32,6 +32,21 @@ namespace C8KJ98_ADT_2022_23_1.Endpoint.Controllers
             return SL.GetService(id);
         }
 
+        // POST /services
+        [HttpPost]
+        public void Post([FromBody] Services value)
+        {
+            SL.AddNewService(value);
+        }
+
+
+        // PUT /services
+        [HttpPut]
+        public void Put([FromBody] Services value)
+        {
+            SL.UpdateServiceCost(value);
+        }
+
 
 
         // DELETE /Services/5

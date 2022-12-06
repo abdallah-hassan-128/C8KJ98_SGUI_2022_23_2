@@ -33,7 +33,12 @@ namespace C8KJ98_ADT_2022_23_1.Endpoint.Controllers
             return RSL.GetConnection(id); ;
         }
 
-
+        // POST /reservationsservices
+        [HttpPost]
+        public void Post([FromBody] ReservationsServices value)
+        {
+            RSL.AddNewConnection(value);
+        }
 
         // DELETE /ReservationsServices/5
         [HttpDelete("{id}")]

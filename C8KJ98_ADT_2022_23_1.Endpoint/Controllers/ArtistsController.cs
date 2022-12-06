@@ -25,7 +25,6 @@ namespace C8KJ98_ADT_2022_23_1.Endpoint.Controllers
             return AL.GetAllArtists();
         }
 
-
         // GET /artists/5
         [HttpGet("{id}")]
         public Artists Get(int id)
@@ -33,6 +32,20 @@ namespace C8KJ98_ADT_2022_23_1.Endpoint.Controllers
             return AL.GetArtist(id);
         }
 
+        // POST /artists
+        [HttpPost]
+        public void Post([FromBody] Artists value)
+        {
+            AL.AddNewArtist(value);
+        }
+
+
+        // PUT /artists
+        [HttpPut]
+        public void Put([FromBody] Artists value)
+        {
+            AL.UpdateArtistCost(value);
+        }
 
 
         // DELETE /artists/5
@@ -43,3 +56,9 @@ namespace C8KJ98_ADT_2022_23_1.Endpoint.Controllers
         }
     }
 }
+
+
+
+
+
+
