@@ -18,18 +18,11 @@ namespace C8KJ98_ADT_2022_23_1.Logic
             _ReservationsRepository = reservationsRepo;
             _FansRepository = fansRepo;
         }
-        public void UpdateCity(int id, string newCity)
+        public void UpdateCity(Fans fan)
         {
-            this._FansRepository.UpdateCity(id, newCity);
+            this._FansRepository.UpdateCity(fan.Id, fan.City);
         }
-        public void UpdateEmail(int id, string newEmail)
-        {
-            this._FansRepository.UpdateEmail(id, newEmail);
-        }
-        public void UpdatePhone(int id, int NewPhoneNumber)
-        {
-            this._FansRepository.UpdatePhone(id, NewPhoneNumber);
-        }
+        
 
         public Fans AddNewFan(Fans fan )
         {

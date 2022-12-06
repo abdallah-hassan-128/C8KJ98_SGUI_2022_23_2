@@ -17,11 +17,10 @@ namespace C8KJ98_ADT_2022_23_1.Logic
             _ReservationsServicesConnectionRepository = reservationsServicesConnectionRepository;
         }
 
-        public ReservationsServices AddNewConnection(int reservationId, int serviceId)
+        public ReservationsServices AddNewConnection(ReservationsServices reserserv)
         {
-            ReservationsServices ConnectionToAdd = new ReservationsServices() { ReservationId = reservationId, ServiceId = serviceId };
-            this._ReservationsServicesConnectionRepository.Add(ConnectionToAdd);
-            return ConnectionToAdd;
+            this._ReservationsServicesConnectionRepository.Add(reserserv);
+            return reserserv;
         }
         public void DeleteConnection(int id)
         {

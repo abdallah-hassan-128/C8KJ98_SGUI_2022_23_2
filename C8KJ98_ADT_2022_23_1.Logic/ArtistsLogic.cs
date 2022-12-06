@@ -19,9 +19,8 @@ namespace C8KJ98_ADT_2022_23_1.Logic
             _ReservationsRepository = reservationsRepository;
         }
 
-        public Artists AddNewArtist(string name, int duration, int price, string category)
+        public Artists AddNewArtist(Artists NewArtist)
         {
-            Artists NewArtist = new Artists() { Name = name, Duration = duration, Price = price, Category = category };
             this._ArtistRepository.Add(NewArtist);
             return NewArtist;
         }
@@ -37,9 +36,9 @@ namespace C8KJ98_ADT_2022_23_1.Logic
                 throw new ArgumentException("This ID can't be found on our ArtistsDatabase.");
             }
         }
-        public void UpdateArtistCost(int artistId, int cost)
+        public void UpdateArtistCost(Artists value)
         {
-            this._ArtistRepository.UpdatePrice(artistId, cost);
+            this._ArtistRepository.UpdatePrice(value.Id, value.Price);
         }
         public IEnumerable<Artists> GetAllArtists()
         {

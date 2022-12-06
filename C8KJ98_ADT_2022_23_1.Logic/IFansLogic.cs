@@ -9,7 +9,7 @@ namespace C8KJ98_ADT_2022_23_1.Logic
 {
     public interface IFansLogic
     {
-        void UpdateCity(int id, string newCity);
+        void UpdateCity(Fans fan);
         
         public Fans AddNewFan(Fans fan);
         public void DeleteFan(int id);

@@ -11,8 +11,8 @@ namespace C8KJ98_ADT_2022_23_1.Logic
     {
         Services GetService(int id);
         IEnumerable<Services> GetAllServices();
-        void UpdateServiceCost(int serviceId, int cost);
-        public Services AddNewService(string name, int price, int rating);
+        void UpdateServiceCost(Services serv);
+        public Services AddNewService(Services serv);
         public void DeleteService(int id);
     }
 }

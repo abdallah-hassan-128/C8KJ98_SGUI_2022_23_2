@@ -21,23 +21,22 @@ namespace C8KJ98_ADT_2022_23_1.Logic
             _artistrepo = artistrepo;
         }
 
-        public void UpdateReservationDate(int id, DateTime newDate)
+        public void UpdateReservationDate(Reservations reser)
         {
-            this._ReservationsRepository.UpdateDate(id, newDate);
+            this._ReservationsRepository.UpdateDate(reser.Id, reser.DateTime);
         }
 
-        public Reservations AddNewReservation(int fanId, int artistId, DateTime dateTime)
+        public Reservations AddNewReservation(Reservations reser)
         {
 
-            Reservations ReservationToAdd = new Reservations() { FanId = fanId, ArtistId = artistId, DateTime = dateTime };
-            if (_fansrepo.GetOne(fanId) == null || _artistrepo.GetOne(artistId) == null)
+            if (_fansrepo.GetOne((int)reser.FanId) == null || _artistrepo.GetOne((int)reser.ArtistId) == null)
             {
                 throw new Exception("Invalid data");
             }
             else
             {
-                this._ReservationsRepository.Add(ReservationToAdd);
-                return ReservationToAdd;
+                this._ReservationsRepository.Add(reser);
+                return reser;
             }
         }
 
