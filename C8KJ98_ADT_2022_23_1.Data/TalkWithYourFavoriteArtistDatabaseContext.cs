@@ -23,7 +23,7 @@ namespace C8KJ98_ADT_2022_23_1.Data
         public virtual DbSet<ReservationsServices> ConnectorTable { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (optionsBuilder != null && !optionsBuilder.IsConfigured)
+            if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.
                     UseLazyLoadingProxies().
@@ -74,7 +74,7 @@ namespace C8KJ98_ADT_2022_23_1.Data
             Reservations reservation11 = new Reservations() { Id = 11, FanId = fan9.Id, ArtistId = artist2.Id, DateTime = new DateTime(2021, 09, 18) };
 
             ReservationsServices connection1 = new ReservationsServices() { Id = 1, ReservationId = reservation1.Id, ServiceId = service1.Id };
-            ReservationsServices connection2 = new ReservationsServices() { Id = 2, ReservationId = reservation1.Id, ServiceId = service2.Id };
+            ReservationsServices connection2 = new ReservationsServices() { Id = 2, ReservationId = reservation2.Id, ServiceId = service2.Id };
             ReservationsServices connection3 = new ReservationsServices() { Id = 3, ReservationId = reservation2.Id, ServiceId = service3.Id };
             ReservationsServices connection4 = new ReservationsServices() { Id = 4, ReservationId = reservation2.Id, ServiceId = service4.Id };
             ReservationsServices connection5 = new ReservationsServices() { Id = 5, ReservationId = reservation3.Id, ServiceId = service5.Id };
