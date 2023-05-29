@@ -16,6 +16,8 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
             <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+
         </Grid.ColumnDefinitions>
         <ListBox 
             ItemsSource="{Binding Artists}"
@@ -30,18 +32,23 @@
                             <ColumnDefinition Width="1*" />
                         </Grid.ColumnDefinitions>
 
-                        <Label Grid.Column="0" Content="{Binding Id}"></Label>
-                        <Label Grid.Column="1" Content="{Binding Name}"></Label>
+                        <Label Grid.Column="0" Content="{Binding Name}"></Label>
+                        <Label Grid.Column="1" Content="{Binding Category}"></Label>
+                        <Label Grid.Column="2" Content="{Binding Price}" ContentStringFormat=" {0} $"></Label>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
         <StackPanel Grid.Column="1">
-            <Label Content="Artist name" Margin="10"/>
+            <Label Content="Artist name" Margin="0 10 10 0"/>
             <TextBox Text="{Binding SelectedArtist.Name}" Margin="10"></TextBox>
-            <Button Content="Add Actor" Margin="10" />
-            <Button Content="Edit Actor" Margin="10" />
-            <Button Command="{Binding DeleteArtistCommand}" Content="Delete Actor" Margin="10" />
+            <Label Content="Artist category" />
+            <TextBox Text="{Binding SelectedArtist.Category}" Margin="10"></TextBox>
+            <Label Content="Artist price" />
+            <TextBox Text="{Binding SelectedArtist.Price}" Margin="10"></TextBox>
+            <Button Command="{Binding AddArtistCommand}" Content="Add Artist" Margin="10" />
+            <Button Command="{Binding EditArtistCommand}" Content="Edit Artist" Margin="10" />
+            <Button Command="{Binding DeleteArtistCommand}" Content="Delete Artist" Margin="10" />
         </StackPanel>
         
     </Grid>
