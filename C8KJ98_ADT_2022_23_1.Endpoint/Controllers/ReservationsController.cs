@@ -1,4 +1,6 @@
 ﻿using C8KJ98_ADT_2022_23_1.Logic;
+using C8KJ98_ADT_2022_23_1.Endpoint.services;
+using Microsoft.AspNetCore.SignalR;
 using C8KJ98_ADT_2022_23_1.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -14,9 +16,12 @@ namespace C8KJ98_ADT_2022_23_1.Endpoint.Controllers
     {
         IReservationsLogic RL;
 
-        public ReservationsController(IReservationsLogic rL)
+        IHubContext<SignalRHub> hub;
+        public ReservationsController(IReservationsLogic rL, IHubContext<SignalRHub> hub)
         {
             RL = rL;
+            this.hub = hub;
+
         }
 
         // GET: /reservations
@@ -39,6 +44,8 @@ namespace C8KJ98_ADT_2022_23_1.Endpoint.Controllers
         public void Post([FromBody] Reservations value)
         {
             RL.AddNewReservation(value);
+            this.hub.Clients.All.SendAsync("ReservationCreated", value);
+
         }
 
 
@@ -47,6 +54,8 @@ namespace C8KJ98_ADT_2022_23_1.Endpoint.Controllers
         public void Put([FromBody] Reservations value)
         {
             RL.UpdateReservationDate(value);
+            this.hub.Clients.All.SendAsync("ReservationUpdated", value);
+
         }
 
 
@@ -55,7 +64,11 @@ namespace C8KJ98_ADT_2022_23_1.Endpoint.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            var artistToDelete = this.RL.GetReservation(id);
+
             RL.DeleteReservation(id);
+            this.hub.Clients.All.SendAsync("ReservationDeleted", artistToDelete);
+
         }
     }
 }
