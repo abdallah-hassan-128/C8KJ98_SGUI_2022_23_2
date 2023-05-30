@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:C8KJ98_SGUI_2022_23_2.WpfClient"
         xmlns:viewModels="clr-namespace:C8KJ98_SGUI_2022_23_2.WpfClient.ViewModels"
         mc:Ignorable="d"
-        Title="ArtistsWindow" Height="450" Width="800">
+        Title="ArtistsWindow" Height="500" Width="800">
     <Window.DataContext>
         <viewModels:ArtistsWindowViewModel/>
 
@@ -49,6 +49,9 @@
             <Button Command="{Binding AddArtistCommand}" Content="Add Artist" Margin="10" />
             <Button Command="{Binding EditArtistCommand}" Content="Edit Artist" Margin="10" />
             <Button Command="{Binding DeleteArtistCommand}" Content="Delete Artist" Margin="10" />
+            <Button Command="{Binding ArtistsEarningCommand}" Content="Total Artists Earnings" Margin="10" />
+            <Button Command="{Binding MostPaidArtistCommand}" Content="Most Paid Artist" Margin="10" />
+            <Button Command="{Binding LessPaidArtistCommand}" Content="Less Paid Artist" Margin="10" />
         </StackPanel>
         
     </Grid>

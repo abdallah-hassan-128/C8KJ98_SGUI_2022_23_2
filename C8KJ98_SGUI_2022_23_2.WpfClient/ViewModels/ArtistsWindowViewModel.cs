@@ -16,6 +16,9 @@ namespace C8KJ98_SGUI_2022_23_2.WpfClient.ViewModels
         private ApiClient _apiClient = new ApiClient();
 
         public ObservableCollection<Artists> Artists { get; set; }
+        public IList<KeyValuePair<string, int>> TotalArtistsEarnings { get; set; }
+        public IList<KeyValuePair<string, int>> MostPaidArtist { get; set; }
+        public IList<KeyValuePair<string, int>> LessPaidArtist { get; set; }
         private Artists _selectedArtist;
 
         public Artists SelectedArtist
@@ -40,10 +43,15 @@ namespace C8KJ98_SGUI_2022_23_2.WpfClient.ViewModels
         public RelayCommand EditArtistCommand { get; set; }
         public RelayCommand DeleteArtistCommand { get; set; }
         public RelayCommand ArtistsEarningCommand { get; set; }
+        public RelayCommand MostPaidArtistCommand { get; set; }
+        public RelayCommand LessPaidArtistCommand { get; set; }
 
         public ArtistsWindowViewModel()
         {
             Artists = new ObservableCollection<Artists>();
+            TotalArtistsEarnings = new List<KeyValuePair<string, int>>();
+            MostPaidArtist = new List<KeyValuePair<string, int>>();
+            LessPaidArtist = new List<KeyValuePair<string, int>>();
 
             _apiClient
                 .GetAsync<List<Artists>>("http://localhost:37793/artists")
@@ -58,11 +66,55 @@ namespace C8KJ98_SGUI_2022_23_2.WpfClient.ViewModels
                     });
                 });
 
+            _apiClient
+               .GetAsync<List<KeyValuePair<string, int>>>("http://localhost:37793/Noncrudartist/ArtistsEarnings")
+               .ContinueWith((artistsEar) =>
+               {
+                   Application.Current.Dispatcher.Invoke(() =>
+                   {
+                       artistsEar.Result.ForEach((artistea) =>
+                       {
+                           TotalArtistsEarnings.Add(artistea);
+                       });
+                   });
+               });
+            _apiClient
+               .GetAsync<List<KeyValuePair<string, int>>>("http://localhost:37793/Noncrudartist/Mostpaidart")
+               .ContinueWith((MostArt) =>
+               {
+                   Application.Current.Dispatcher.Invoke(() =>
+                   {
+                       MostArt.Result.ForEach((mostartist) =>
+                       {
+                           MostPaidArtist.Add(mostartist);
+                       });
+                   });
+               });
+            _apiClient
+              .GetAsync<List<KeyValuePair<string, int>>>("http://localhost:37793/Noncrudartist/Lesspaidart")
+              .ContinueWith((MostArt) =>
+              {
+                  Application.Current.Dispatcher.Invoke(() =>
+                  {
+                      MostArt.Result.ForEach((mostartist) =>
+                      {
+                          LessPaidArtist.Add(mostartist);
+                      });
+                  });
+              });
+
+
             AddArtistCommand = new RelayCommand(AddArtist);
             EditArtistCommand = new RelayCommand(EditArtist);
             DeleteArtistCommand = new RelayCommand(DeleteArtist);
 
+            ArtistsEarningCommand = new RelayCommand(ArtistsEarningCalculation);
+            MostPaidArtistCommand = new RelayCommand(MostPaidArtistCalculation);
+            LessPaidArtistCommand = new RelayCommand(LessPaidArtistCalculation);
+
+
         }
+        #region CRUD
         private void AddArtist()
         {
             Artists n = new Artists
@@ -111,5 +163,23 @@ namespace C8KJ98_SGUI_2022_23_2.WpfClient.ViewModels
                     });
                 });
         }
+        #endregion
+
+        #region NON-CRUD
+        private void ArtistsEarningCalculation()
+        {
+            new ArtistsEarningWindow().Show();
+        }
+        private void MostPaidArtistCalculation()
+        {
+
+            new MostPaidArtistWindow().Show();
+        }
+        private void LessPaidArtistCalculation()
+        {
+
+            new LessPaidArtistWindow().Show();
+        }
+        #endregion
     }
 }
