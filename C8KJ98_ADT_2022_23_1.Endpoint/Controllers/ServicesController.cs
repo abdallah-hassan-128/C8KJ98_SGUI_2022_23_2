@@ -1,6 +1,7 @@
 ﻿using C8KJ98_ADT_2022_23_1.Logic;
 using C8KJ98_ADT_2022_23_1.Models;
 using C8KJ98_ADT_2022_23_1.Endpoint.services;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -15,9 +16,13 @@ namespace C8KJ98_ADT_2022_23_1.Endpoint.Controllers
     public class ServicesController:ControllerBase
     {
         IServicesLogic SL;
-        public ServicesController(IServicesLogic sL)
+        IHubContext<SignalRHub> hub;
+
+        public ServicesController(IServicesLogic sL, IHubContext<SignalRHub> hub)
         {
             SL = sL;
+            this.hub = hub;
+
         }
         // GET: /Services
         [HttpGet]
@@ -39,6 +44,8 @@ namespace C8KJ98_ADT_2022_23_1.Endpoint.Controllers
         public void Post([FromBody] Services value)
         {
             SL.AddNewService(value);
+            this.hub.Clients.All.SendAsync("ServiceCreated", value);
+
         }
 
 
@@ -47,6 +54,8 @@ namespace C8KJ98_ADT_2022_23_1.Endpoint.Controllers
         public void Put([FromBody] Services value)
         {
             SL.UpdateServiceCost(value);
+            this.hub.Clients.All.SendAsync("ServiceUpdated", value);
+
         }
 
 
@@ -55,7 +64,11 @@ namespace C8KJ98_ADT_2022_23_1.Endpoint.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            var artistToDelete = this.SL.GetService(id);
             SL.DeleteService(id);
+            this.hub.Clients.All.SendAsync("ServiceDeleted", artistToDelete);
+
+
         }
     }
 }
