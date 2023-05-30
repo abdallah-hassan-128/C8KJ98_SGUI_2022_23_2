@@ -11,6 +11,8 @@ using Microsoft.EntityFrameworkCore;
 using C8KJ98_ADT_2022_23_1.Data;
 using C8KJ98_ADT_2022_23_1.Logic;
 using C8KJ98_ADT_2022_23_1.Repository;
+using C8KJ98_ADT_2022_23_1.Endpoint.services;
+
 
 
 
@@ -37,6 +39,8 @@ namespace C8KJ98_ADT_2022_23_1.Endpoint
             services.AddTransient<IReservationsServicesRepository, ReservationsServicesRepository>();
             services.AddTransient<IServicesRepository, ServicesRepository>();
             services.AddTransient<TalkWithYourFavoriteArtistDbContext, TalkWithYourFavoriteArtistDbContext>();
+            services.AddSignalR();
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -45,12 +49,21 @@ namespace C8KJ98_ADT_2022_23_1.Endpoint
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseCors(x => x
+               .AllowCredentials()
+               .AllowAnyMethod()
+               .AllowAnyHeader()
+               .WithOrigins("http://localhost:23079"));
 
             app.UseRouting();
+
+            app.UseAuthorization();
+
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<SignalRHub>("/hub");
 
             });
         }

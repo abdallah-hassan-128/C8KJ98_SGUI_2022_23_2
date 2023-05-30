@@ -47,6 +47,9 @@ namespace C8KJ98_SGUI_2022_23_2.JSClient
 
             app.UseAuthorization();
 
+            app.UseStaticFiles();
+
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
